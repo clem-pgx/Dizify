@@ -40,7 +40,7 @@ const useStyles = makeStyles(styles);
 
 const List = (props) => {
     const classes = useStyles();
-    const {titres} = props;
+    const { titres } = props;
     if (!titres || titres.length === 0) return <p>Aucun titres</p>;
     return (
         <div>
@@ -62,8 +62,8 @@ const List = (props) => {
                                 {titres.map((titre) => {
                                     return (
                                         <tr>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{titre.nom}</td>
+                                            <td>{titre.duree}</td>
                                         </tr>
                                     );
                                 })}

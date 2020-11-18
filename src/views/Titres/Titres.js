@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
-// @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
-// core components
 import TitresList from 'components/Titres/TitresList';
 import withTitresLoading from 'components/Titres/withTitresLoading';
 
@@ -52,8 +50,9 @@ function TitresApp() {
         fetch(apiUrl)
             .then((res) => res.json())
             .then((titres) => {
-                setAppState({loading: false, titres: titres});
+                setAppState({ loading: false, titres: titres });
             });
+            
     }, [setAppState]);
     return (
         <div className='App'>
