@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { forwardRef } from 'react';
 import Avatar from 'react-avatar';
-import Grid from '@material-ui/core/Grid'
+//import Grid from '@material-ui/core/Grid'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -23,13 +23,13 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import CardFooter from "components/Card/CardFooter.js";
-import { card } from "assets/jss/material-dashboard-react";
+//import CustomInput from "components/CustomInput/CustomInput.js";
+//import Button from "components/CustomButtons/Button.js";
+//import CardFooter from "components/Card/CardFooter.js";
+//import { card } from "assets/jss/material-dashboard-react";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import Table from "components/Table/Table.js";
+//import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";

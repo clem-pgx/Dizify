@@ -76,6 +76,7 @@ function TitresApp() {
     {
         return (
             <div className='App'>
+            <h4 className={classes.cardTitleWhite}>Titres</h4>
                 <div className='titre-container'>
                     <TitresForm titres={appState.titres} artistes={appState.artistes} albums={appState.albums} />
                     <TitresList titres={appState.titres}/>
