@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import TitresList from 'components/Titres/TitresList';
 import withTitresLoading from 'components/Titres/withTitresLoading';
-
+import axios from 'axios';
 
 const styles = {
     cardCategoryWhite: {
@@ -47,17 +47,18 @@ function TitresApp() {
     useEffect(() => {
         setAppState({loading: true});
         const apiUrl = `http://localhost:8080/titres`;
-        fetch(apiUrl)
-            .then((res) => res.json())
-            .then((titres) => {
-                setAppState({ loading: false, titres: titres });
-            });
-            
+        axios.get(apiUrl)
+            .then((response) => {
+                setAppState({loading: false, titres: response.data});
+            }).catch((error) => {
+            console.log(error)
+        })
+
     }, [setAppState]);
     return (
         <div className='App'>
             <div className='titre-container'>
-                <TitresListLoading isLoading={appState.loading} artistes={appState.titres}/>
+                <TitresListLoading isLoading={appState.loading} titres={appState.titres}/>
             </div>
         </div>
     );
