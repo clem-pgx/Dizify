@@ -22,6 +22,7 @@ import Album from "@material-ui/icons/Album";
 import Playlist_play from "@material-ui/icons/PlaylistPlay";
 import Grade from "@material-ui/icons/Grade";
 import Home from "@material-ui/icons/Home";
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
@@ -29,6 +30,7 @@ import UserProfile from "views/Artistes/Artistes.js";
 import TableList from "views/Titres/Titres.js";
 import Playlists from "views/Playlists/Playlists.js";
 import Favoris from "views/Favoris/Favoris.js";
+import Albums from "views/Albums/Albums.js";
 import Admin from "views/Admin/Admin.js";
 
 const dashboardRoutes = [
@@ -44,6 +46,13 @@ const dashboardRoutes = [
     name: "Artistes",
     icon: Person,
     component: UserProfile,
+    layout: "/admin"
+  },
+  {
+    path: "/albums",
+    name: "Albums",
+    icon: AssessmentIcon,
+    component: Albums,
     layout: "/admin"
   },
   {
