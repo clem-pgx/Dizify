@@ -81,25 +81,28 @@ const api = axios.create({
 function ArtistesApp() {
 
   var columnsArtistes = [
-    {title: "id", field: "id", hidden: true},
+    {title: "id", field: "id", editable: 'never'},
     {title: "Avatar", render: rowData => <Avatar maxInitials={1} size={50} round={true} name={rowData === undefined ? " " : rowData.nom} />  },
     {title: "Nom", field: "nom"},
     /* {title: "Image", field: "image"} */
   ]
   var columnsTitres = [
-    {title: "id", field: "id", hidden: true},
+    {title: "id", field: "id", editable: 'never'},
     {title: "Nom", field: "nom"},
     {title: "Duree", field: "duree"},
-    {title: "Artistes", field: "artistes.nom"},
-    {title: "Albums", field: "album.nom"}
+    {title: "Artistes_id", field: "artistes.id"},
+    {title: "Artistes", field: "artistes.nom", editable: 'never'},
+    {title: "Albums_id", field: "albums.id"},
+    {title: "Albums", field: "albums.nom", editable: 'never'}
 
   ]
   var columnsAlbums = [
-    {title: "id", field: "id", hidden: true},
+    {title: "id", field: "id", editable: 'never'},
     {title: "Nom", field: "nom"},
     /* {title: "Image", field: "image"}, */
     {title: "Date", field: "date"},
-    {title: "Artistes", field: "artistes.nom"}
+    {title: "Artistes_id", field: "artistes.id"},
+    {title: "Artistes", field: "artistes.nom", editable: 'never'}
   ]
   const [artistes, setArtistes] = useState([]); //table data
   const [titres, setTitres] = useState([]); //table data
@@ -364,10 +367,10 @@ function ArtistesApp() {
   }
 
   const albumsRowDelete = (oldAlbums, resolve) => {
-    
+
     api.delete("/albums/"+oldAlbums.id)
       .then(res => {
-        const albumsDelete = [... albums];
+        const albumsDelete = [...albums];
         const index = oldAlbums.tableAlbums.id;
         albumsDelete.splice(index, 1);
         setAlbums([...albumsDelete]);
@@ -421,6 +424,14 @@ function ArtistesApp() {
                         artistesRowDelete(oldArtistes, resolve)
                       }),
                   }}
+                  actions={[
+                    {
+                      icon: 'refresh',
+                      tooltip: 'Refresh Data',
+                      isFreeAction: true,
+                      onClick: () => api.get("/artistes").then(res => { setArtistes(res.data) }).catch(error=>{ console.log("Error") }),
+                    }
+                  ]}
                 />
               </CardBody>
               </Card>
@@ -463,6 +474,14 @@ function ArtistesApp() {
                           titresRowDelete(oldTitres, resolve)
                       }),
                   }}
+                  actions={[
+                    {
+                      icon: 'refresh',
+                      tooltip: 'Refresh Data',
+                      isFreeAction: true,
+                      onClick: () => api.get("/titres").then(res => { setTitres(res.data) }).catch(error=>{ console.log("Error") }),
+                    }
+                  ]}
                 />
               </CardBody>
               </Card>
@@ -505,6 +524,14 @@ function ArtistesApp() {
                         albumsRowDelete(oldAlbums, resolve)
                       }),
                   }}
+                  actions={[
+                    {
+                      icon: 'refresh',
+                      tooltip: 'Refresh Data',
+                      isFreeAction: true,
+                      onClick: () => api.get("/albums").then(res => { setAlbums(res.data) }).catch(error=>{ console.log("Error") }),
+                    }
+                  ]}
                 />
               </CardBody>
               </Card>
