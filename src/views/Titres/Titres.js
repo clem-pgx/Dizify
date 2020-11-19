@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import TitresList from 'components/Titres/TitresList';
-import withTitresLoading from 'components/Titres/withTitresLoading';
+import TitresForm from 'components/Titres/TitresForm'
 import axios from 'axios';
 
 const styles = {
@@ -38,30 +38,51 @@ const useStyles = makeStyles(styles);
 
 function TitresApp() {
     const classes = useStyles();
-    const TitresListLoading = withTitresLoading(TitresList);
     const [appState, setAppState] = useState({
         loading: false,
         titres: null,
+        artistes: null,
+        albums: null
     });
 
     useEffect(() => {
         setAppState({loading: true});
-        const apiUrl = `http://localhost:8080/titres`;
-        axios.get(apiUrl)
+        axios.get(`http://localhost:8080/titres`)
             .then((response) => {
                 setAppState({loading: false, titres: response.data});
             }).catch((error) => {
             console.log(error)
         })
+        axios.get(`http://localhost:8080/artistes`)
+            .then((response) => {
+                setAppState({loading: false, artistes: response.data});
+            }).catch((error) => {
+            console.log(error)
+        })
+        axios.get(`http://localhost:8080/albums`)
+            .then((response) => {
+                setAppState({loading: false, albums: response.data});
+            }).catch((error) => {
+            console.log(error)
+        })
 
     }, [setAppState]);
-    return (
-        <div className='App'>
-            <div className='titre-container'>
-                <TitresListLoading isLoading={appState.loading} titres={appState.titres}/>
+    if (appState.loading) {
+        return <p style={{textAlign: 'center', fontSize: '30px'}}>
+            Hold on, fetching data may take some time :)
+        </p>
+    }
+    else
+    {
+        return (
+            <div className='App'>
+                <div className='titre-container'>
+                    <TitresForm titres={appState.titres} artistes={appState.artistes} albums={appState.albums} />
+                    <TitresList titres={appState.titres}/>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default TitresApp;
