@@ -31,6 +31,7 @@ import TableList from "views/Titres/Titres.js";
 import Playlists from "views/Playlists/Playlists.js";
 import Favoris from "views/Favoris/Favoris.js";
 import Albums from "views/Albums/Albums.js";
+//import AlbumsDetails from "views/Albums/AlbumsDetails.js";
 import Admin from "views/Admin/Admin.js";
 
 const dashboardRoutes = [

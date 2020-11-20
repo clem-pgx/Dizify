@@ -19,17 +19,17 @@ const useStyles = makeStyles(styles);
 export default function ArtistesApp() {
   const classes = useStyles();
 
-  const [titres, setTitres] = useState([]); //table data
+  const [albums, setAlbums] = useState([]); //table data
   //for error handling
   //const [iserror, setIserror] = useState(false)
   //const [errorMessages, setErrorMessages] = useState([])
 
   useEffect(() => { 
-    fetch("http://localhost:8080/titres")
+    fetch("http://localhost:8080/albums")
     .then(res => res.json())
     .then(
       (result) => {
-        setTitres(result);
+        setAlbums(result);
         console.log(result)
       },
       // Remarque : il faut gérer les erreurs ici plutôt que dans
@@ -40,20 +40,20 @@ export default function ArtistesApp() {
     return (
       <div>
         <GridContainer>
-        {titres.map(titre => (
+        {albums.map(album => (
           <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="success" stats icon>
                 <CardIcon color="success">
                   <Store />
                 </CardIcon>
-                <p className={classes.cardCategory}>{titre.nom}</p>
-                <h3 className={classes.cardTitle}>{titre.artistes.nom}</h3>
+                <p className={classes.cardCategory}>{album.artistes.nom}</p>
+                <h3 className={classes.cardTitle}>{album.nom}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
                   <DateRange />
-                  Last 24 Hours
+                  {album.date}
                 </div>
               </CardFooter>
             </Card>
