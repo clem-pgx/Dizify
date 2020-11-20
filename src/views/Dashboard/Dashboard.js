@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
@@ -12,7 +11,6 @@ import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import axios from 'axios'
@@ -69,17 +67,16 @@ export default function Dashboard() {
       {artistes.slice(1).map(artiste => (
         <GridItem xs={12} sm={6} md={4}>
           <Card>
-            <CardHeader color="warning" stats icon>
-              <CardIcon color="warning">
-                <Icon>content_copy</Icon>
-              </CardIcon>
+            <CardHeader color="warning">
+              <p className={classes.cardCategory}></p>
               <h3 className={classes.cardTitle}>
                 {artiste.nom}
               </h3>
             </CardHeader>
             <cardFooter stats>
             <div className={classes.stats}>
-              </div>
+                {/* <img src="https://i.pravatar.cc/100"/> */}
+            </div>
             </cardFooter> 
           </Card>
         </GridItem>
@@ -90,10 +87,8 @@ export default function Dashboard() {
       {albums.slice(0).map(album => (
         <GridItem xs={12} sm={6} md={4}>
           <Card>
-            <CardHeader color="success" stats icon>
-              <CardIcon color="success">
-                <Icon>content_copy</Icon>
-              </CardIcon>
+            <CardHeader color="success" >
+              <p className={classes.cardCategory}></p>
               <h3 className={classes.cardTitle}>
                 {album.nom}
               </h3>

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
-import DateRange from "@material-ui/icons/DateRange";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -11,6 +10,8 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardFooter from "components/Card/CardFooter.js";
+import Button from '@material-ui/core/Button';
+
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -18,7 +19,6 @@ const useStyles = makeStyles(styles);
 
 export default function ArtistesApp() {
   const classes = useStyles();
-
   const [albums, setAlbums] = useState([]); //table data
   //for error handling
   //const [iserror, setIserror] = useState(false)
@@ -37,6 +37,7 @@ export default function ArtistesApp() {
       // dues à de véritables bugs dans les composants.
     )
   }, [])
+
     return (
       <div>
         <GridContainer>
@@ -47,13 +48,14 @@ export default function ArtistesApp() {
                 <CardIcon color="success">
                   <Store />
                 </CardIcon>
-                <p className={classes.cardCategory}>{album.artistes.nom}</p>
+                <p className={classes.cardCategory}>{album.artistes.nom} - {album.date}</p>
                 <h3 className={classes.cardTitle}>{album.nom}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <DateRange />
-                  {album.date}
+                  <Button variant="contained" /* startIcon={<Album />} */>
+                    Titres
+                  </Button>
                 </div>
               </CardFooter>
             </Card>

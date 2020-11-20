@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -70,5 +70,91 @@ export default function Playlists() {
         </Card>
       </GridItem>
     </GridContainer>
+  );
+}
+ */
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
+
+// Since routes are regular React components, they
+// may be rendered anywhere in the app, including in
+// child elements.
+//
+// This helps when it's time to code-split your app
+// into multiple bundles because code-splitting a
+// React Router app is the same as code-splitting
+// any other React app.
+
+export default function NestingExample() {
+  return (
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/albums">albums</Link>
+          </li>
+        </ul>
+
+        <hr />
+
+        <Switch>
+          <Route path="/albums">
+            <Topics />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+function Topics() {
+
+  let { path, url } = useRouteMatch();
+
+  return (
+    <div>
+      <h2>Albums</h2>
+      <ul>
+        <li>
+          <Link to={`${url}/rendering`}>Rendering with React</Link>
+        </li>
+        <li>
+          <Link to={`${url}/components`}>Components</Link>
+        </li>
+        <li>
+          <Link to={`${url}/props-v-state`}>Props v. State</Link>
+        </li>
+      </ul>
+
+      <Switch>
+        <Route exact path={path}>
+          <h3>Please select a topic.</h3>
+        </Route>
+        <Route path={`${path}/:albumsId`}>
+          <Topic />
+        </Route>
+      </Switch>
+    </div>
+  );
+}
+
+function Topic() {
+  // The <Route> that rendered this component has a
+  // path of `/topics/:topicId`. The `:topicId` portion
+  // of the URL indicates a placeholder that we can
+  // get from `useParams()`.
+  let { albumsId } = useParams();
+
+  return (
+    <div>
+      <h3>{albumsId}</h3>
+    </div>
   );
 }

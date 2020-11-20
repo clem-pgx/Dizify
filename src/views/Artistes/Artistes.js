@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
-import DateRange from "@material-ui/icons/DateRange";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -11,11 +10,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardFooter from "components/Card/CardFooter.js";
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import Album from "@material-ui/icons/Album";
+import Button from '@material-ui/core/Button';
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -52,21 +47,14 @@ export default function ArtistesApp() {
                 <CardIcon color="success">
                   <Store />
                 </CardIcon>
+                <p className={classes.cardCategory}></p>
                 <h3 className={classes.cardTitle}>{artiste.nom}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                <BottomNavigation
-                  /* value={value} */
-/*                   onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }} */
-                  showLabels
-                  className={classes.root}
-                >
-                  <BottomNavigationAction label="Albums" icon={<AssessmentIcon />} />
-                  <BottomNavigationAction label="Titres" icon={<Album />} />
-                </BottomNavigation>
+                <Button variant="contained" /* startIcon={<Album />} */>
+                    + d'infos
+                  </Button>
                 </div>
               </CardFooter>
             </Card>
