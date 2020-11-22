@@ -31,6 +31,7 @@ const api = axios.create({
 export default function Dashboard() {
 
   const [artistes, setArtistes] = useState([]); //table data
+  // eslint-disable-next-line
   const [titres, setTitres] = useState([]); //table data
   const [albums, setAlbums] = useState([]); //table data
 

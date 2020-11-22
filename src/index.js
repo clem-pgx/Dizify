@@ -18,7 +18,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 // core components
 import Admin from "layouts/Admin.js";
@@ -31,7 +31,7 @@ ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/admin" component={Admin} />
-      <Redirect from="/" to="/admin/accueil" />
+      {/* <Redirect from="/" to="/admin/accueil" /> */}
     </Switch>
   </Router>,
   document.getElementById("root")
