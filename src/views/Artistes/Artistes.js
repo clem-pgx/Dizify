@@ -24,16 +24,18 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  // eslint-disable-next-line
   Link,
   useParams,
   useRouteMatch
 } from "react-router-dom";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import { RedirectSource } from 'react-avatar';
 
 const useRowStyles = makeStyles({
   root: {
@@ -110,11 +112,14 @@ function Topics() {
   return (
     <div>
       <h2>Albums</h2>
+      <Link variant="contained" size="small" color="secondary" style={{float:'right'}} to="/admin/artistes">
+        Retour
+      </Link>
       <Switch>
         <Route exact path={path}>
           <h3>Please select a topic.</h3>
         </Route>
-        <Route path={`${url}/:albumsId`}>
+        <Route path={`${url}/:artistId`}>
           <Topic />
         </Route>
       </Switch>
@@ -124,7 +129,7 @@ function Topics() {
 
 function Topic() {
 
-  let { albumsId } = useParams();
+  let { artistId } = useParams();
   const [album, setAlbum] = useState([]); //table data
   const [titres, setTitres] = useState([]); //table data
   const [open, setOpen] = React.useState(false);
@@ -134,7 +139,8 @@ function Topic() {
   //const [errorMessages, setErrorMessages] = useState([])
   const getAlbum = "http://localhost:8080/artistes/albums/";
   const getTitre = "http://localhost:8080/albums/titres/";
-  const theIdAlbum = albumsId;
+  const theIdAlbum = artistId;
+
   useEffect(() => { 
     fetch(getAlbum + theIdAlbum)
     .then(res => res.json())
@@ -155,47 +161,13 @@ function Topic() {
   }, [])
   return (
     <div>
-{/*       <h3>{albumsId}</h3> */}
       {album.map(album => (
-      <React.Fragment>
-        <TableRow className={classes.root}>
-          <TableCell>
-            <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-          <TableCell component="th" scope="row">
-            {album.nom}
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box margin={1}>
-                <Typography variant="h6" gutterBottom component="div">
-                  Titres
-                </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Nom</TableCell>
-                      <TableCell>durée (en sec)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {titres.map((titre) => (
-                      <TableRow key={titre.nom}>
-                        <TableCell component="th" scope="row">{titre.nom}</TableCell>
-                        <TableCell>{titre.duree}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </React.Fragment>
+/*         <a href={'/admin/albums/titresByAlbums/' + album.id}>{album.nom}</a> */
+        <Chip avatar={<Avatar></Avatar>} label={album.nom} onClick={(e) => {
+          e.preventDefault();
+          window.location.href='/admin/albums/titresByAlbums/' + album.id;
+          }}
+          /* onClick={window.location.href='/admin/albums/titresByAlbums/' + album.id} *//>
       ))}
     </div>
   );
